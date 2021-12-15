@@ -6,9 +6,9 @@ import (
 	"log"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/config"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb/types"
+	viperconfig "github.com/jfonseca85/aws-sdk-hello-world/config"
 )
 
 func main() {
@@ -24,13 +24,16 @@ func main() {
 			}))
 		//cfg, err := config.LoadDefaultConfig(context.TODO(), config.WithRegion("sa-east-1"), configDynamoDBLocal)
 	*/
-	cfg, err := config.LoadDefaultConfig(context.TODO(), config.WithRegion("sa-east-1"))
+	cfg, _ := viperconfig.NewConfig(context.TODO())
+	awsconfig, err := global.InitAWSConfig(cfg)
+
+	//cfg, err := config.LoadDefaultConfig(context.TODO(), config.WithRegion("sa-east-1"))
 	if err != nil {
 		log.Fatalf("unable to load SDK config, %v", err)
 	}
 
 	// Using the Config value, create the DynamoDB client
-	svc := dynamodb.NewFromConfig(cfg)
+	svc := dynamodb.NewFromConfig(awsconfig)
 
 	tableName := "hello-world-labs-table-01"
 	attributeName := "id-labs-table-01"
