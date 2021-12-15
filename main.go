@@ -24,6 +24,9 @@ func main() {
 			}))
 		//cfg, err := config.LoadDefaultConfig(context.TODO(), config.WithRegion("sa-east-1"), configDynamoDBLocal)
 	*/
+	//Carrega o arquivo de configuração
+	//Retorna um objeto do tipo aws.config mais viper
+	//
 	cfg, _ := configlocal.NewConfig(context.TODO())
 	awsconfig, err := configlocal.InitAWSConfig(cfg)
 

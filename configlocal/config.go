@@ -10,23 +10,22 @@ import (
 	"github.com/spf13/viper"
 )
 
-type Config struct {
+type configlocal struct {
 	Viper     *viper.Viper
-	AWSConfig aws.Config
-	AWSClient AWSClient
+	AWSClient awsclient
 }
 
-type AWSClient struct {
+type awsclient struct {
 	config aws.Config
 }
 
-func NewAWSClient(config aws.Config) AWSClient {
-	return AWSClient{
+func newAWSClient(config aws.Config) awsclient {
+	return awsclient{
 		config: config,
 	}
 }
 
-func NewConfig(ctx context.Context) (*Config, error) {
+func NewConfig(ctx context.Context) (*configlocal, error) {
 	viper.AddConfigPath(".")  // to work on dev and production envs
 	viper.AddConfigPath("./") // to work on dev and production envs
 	viper.SetConfigName("env")
@@ -41,22 +40,21 @@ func NewConfig(ctx context.Context) (*Config, error) {
 		return nil, err
 	}
 
-	awsconfig, err := AWSConfig(ctx, viper.GetViper())
+	awsconfig, err := aWSConfig(ctx, viper.GetViper())
 
 	if err != nil {
 		return nil, err
 	}
 
-	awsclient := NewAWSClient(awsconfig)
+	awsclient := newAWSClient(awsconfig)
 
-	return &Config{
+	return &configlocal{
 		Viper:     viper.GetViper(),
-		AWSConfig: awsconfig,
 		AWSClient: awsclient,
 	}, nil
 }
 
-func AWSConfig(ctx context.Context, viper *viper.Viper) (aws.Config, error) {
+func aWSConfig(ctx context.Context, viper *viper.Viper) (aws.Config, error) {
 
 	awsEndpoint := viper.GetString("aws.endpoint_url")
 	awsRegion := viper.GetString("aws.default_region")
