@@ -3,44 +3,13 @@ package configlocal
 import (
 	"context"
 	"os"
-	"strings"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/config"
 	"github.com/spf13/viper"
 )
 
-type configlocal struct {
-	Viper     *viper.Viper
-	AWSClient aws.Config
-}
-
-func NewConfig(ctx context.Context) (*configlocal, error) {
-	viper.AddConfigPath(".")  // to work on dev and production envs
-	viper.AddConfigPath("./") // to work on dev and production envs
-	viper.SetConfigName("env")
-	viper.SetConfigType("yaml")
-
-	viper.AutomaticEnv()
-	viper.SetEnvKeyReplacer(strings.NewReplacer(".", "_"))
-
-	err := viper.ReadInConfig()
-	if err != nil {
-		return nil, err
-	}
-
-	awsconfig, err := aWSConfig(ctx, viper.GetViper())
-	if err != nil {
-		return nil, err
-	}
-
-	return &configlocal{
-		Viper:     viper.GetViper(),
-		AWSClient: awsconfig,
-	}, nil
-}
-
-func aWSConfig(ctx context.Context, viper *viper.Viper) (aws.Config, error) {
+func awsloadconfig(ctx context.Context, viper *viper.Viper) (aws.Config, error) {
 
 	awsEndpoint := viper.GetString("aws.endpoint_url")
 	awsRegion := viper.GetString("aws.default_region")
