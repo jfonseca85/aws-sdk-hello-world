@@ -73,5 +73,13 @@ import (
 	svc := dynamodb.NewFromConfig(cfg.AWSClient)
 ```
 
+###### Compile and Execute
+
+```sh
+$ go run .
+Table:
+hello-world-labs-table-01
+```
+
 
 
