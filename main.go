@@ -15,28 +15,12 @@ func main() {
 	// Using the SDK's default configuration, loading additional config
 	// and credentials values from the environment variables, shared
 	// credentials, and shared configuration files
-
-	/*
-		Configurando com o DynamoDB Local
-		configDynamoDBLocal := config.WithEndpointResolver(aws.EndpointResolverFunc(
-			func(service, region string) (aws.Endpoint, error) {
-				return aws.Endpoint{URL: "http://localhost:8000"}, nil
-			}))
-		//cfg, err := config.LoadDefaultConfig(context.TODO(), config.WithRegion("sa-east-1"), configDynamoDBLocal)
-	*/
-	//Carrega o arquivo de configuração
-	//Retorna um objeto do tipo aws.config mais viper
-	//
-	cfg, _ := configlocal.NewConfig(context.TODO())
-	awsconfig, err := configlocal.InitAWSConfig(cfg)
-
-	//cfg, err := config.LoadDefaultConfig(context.TODO(), config.WithRegion("sa-east-1"))
+	cfg, err := configlocal.NewConfig(context.TODO())
 	if err != nil {
 		log.Fatalf("unable to load SDK config, %v", err)
 	}
-
 	// Using the Config value, create the DynamoDB client
-	svc := dynamodb.NewFromConfig(awsconfig)
+	svc := dynamodb.NewFromConfig(cfg.AWSClient)
 
 	tableName := "hello-world-labs-table-01"
 	attributeName := "id-labs-table-01"

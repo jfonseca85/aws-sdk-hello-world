@@ -42,28 +42,35 @@ aws_access_key_id = `AWS access key ID goes here`
 aws_secret_access_key = `Secret key goes here`
 ```
 
+## Go: arquivo de configuração env.yaml
+```yaml
+aws:
+  default_region: sa-east-1
+  endpoint_url: http://localhost:8000
+```
+
 ## Go: configuração da região e do endpoint da AWS
 
-```
+```go
 import (
 	"context"
+	"fmt"
 	"log"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/config"
-	
+	"github.com/aws/aws-sdk-go-v2/service/dynamodb"
+	"github.com/aws/aws-sdk-go-v2/service/dynamodb/types"
+	"github.com/jfonseca85/aws-sdk-hello-world/configlocal"
 )
 
 ...
-		//Configurando com o DynamoDB Local
-		configDynamoDBLocal := config.WithEndpointResolver(aws.EndpointResolverFunc(
-			func(service, region string) (aws.Endpoint, error) {
-				return aws.Endpoint{URL: "http://localhost:8000"}, nil
-			}))
-			
-		//Configrando para acessar a região sa-east-1 ( São Paulo)
-		cfg, err := config.LoadDefaultConfig(context.TODO(),
-		config.WithRegion("sa-east-1"), configDynamoDBLocal)
+
+	cfg, err := configlocal.NewConfig(context.TODO())
+	if err != nil {
+		log.Fatalf("unable to load SDK config, %v", err)
+	}
+	// Using the Config value, create the DynamoDB client
+	svc := dynamodb.NewFromConfig(cfg.AWSClient)
 ```
 
 

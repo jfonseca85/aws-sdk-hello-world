@@ -15,16 +15,6 @@ type configlocal struct {
 	AWSClient aws.Config
 }
 
-type awsclient struct {
-	config aws.Config
-}
-
-func newAWSClient(config aws.Config) awsclient {
-	return awsclient{
-		config: config,
-	}
-}
-
 func NewConfig(ctx context.Context) (*configlocal, error) {
 	viper.AddConfigPath(".")  // to work on dev and production envs
 	viper.AddConfigPath("./") // to work on dev and production envs
