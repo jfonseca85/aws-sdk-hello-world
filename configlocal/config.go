@@ -12,7 +12,7 @@ import (
 
 type configlocal struct {
 	Viper     *viper.Viper
-	AWSClient awsclient
+	AWSClient aws.Config
 }
 
 type awsclient struct {
@@ -46,11 +46,9 @@ func NewConfig(ctx context.Context) (*configlocal, error) {
 		return nil, err
 	}
 
-	awsclient := newAWSClient(awsconfig)
-
 	return &configlocal{
 		Viper:     viper.GetViper(),
-		AWSClient: awsclient,
+		AWSClient: awsconfig,
 	}, nil
 }
 
