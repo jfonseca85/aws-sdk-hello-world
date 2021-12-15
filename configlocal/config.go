@@ -25,13 +25,11 @@ func NewConfig(ctx context.Context) (*configlocal, error) {
 	viper.SetEnvKeyReplacer(strings.NewReplacer(".", "_"))
 
 	err := viper.ReadInConfig()
-
 	if err != nil {
 		return nil, err
 	}
 
 	awsconfig, err := aWSConfig(ctx, viper.GetViper())
-
 	if err != nil {
 		return nil, err
 	}

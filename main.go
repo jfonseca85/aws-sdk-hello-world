@@ -47,7 +47,7 @@ func main() {
 		BillingMode:          types.BillingModePayPerRequest,
 	}
 
-	_, err = svc.CreateTable(context.TODO(), &createTableOutput)
+	svc.CreateTable(context.TODO(), &createTableOutput)
 
 	// Build the request with its input parameters
 	resp, err := svc.ListTables(context.TODO(), &dynamodb.ListTablesInput{
