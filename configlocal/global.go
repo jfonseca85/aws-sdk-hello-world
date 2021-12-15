@@ -6,10 +6,9 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/config"
-	"github.com/jfonseca85/aws-sdk-hello-world/configlocal"
 )
 
-func InitAWSConfig(cfg *configlocal.Config) (aws.Config, error) {
+func InitAWSConfig(cfg *Config) (aws.Config, error) {
 
 	awsEndpoint := cfg.Viper.GetString("aws.endpoint_url")
 	awsRegion := cfg.Viper.GetString("aws.default_region")

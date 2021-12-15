@@ -8,7 +8,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb/types"
-	viperconfig "github.com/jfonseca85/aws-sdk-hello-world/config"
+	"github.com/jfonseca85/aws-sdk-hello-world/configlocal"
 )
 
 func main() {
@@ -24,8 +24,8 @@ func main() {
 			}))
 		//cfg, err := config.LoadDefaultConfig(context.TODO(), config.WithRegion("sa-east-1"), configDynamoDBLocal)
 	*/
-	cfg, _ := viperconfig.NewConfig(context.TODO())
-	awsconfig, err := global.InitAWSConfig(cfg)
+	cfg, _ := configlocal.NewConfig(context.TODO())
+	awsconfig, err := configlocal.InitAWSConfig(cfg)
 
 	//cfg, err := config.LoadDefaultConfig(context.TODO(), config.WithRegion("sa-east-1"))
 	if err != nil {

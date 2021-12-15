@@ -1,20 +1,23 @@
 module github.com/jfonseca85/aws-sdk-hello-world
 
-replace github.com/jfonseca85/aws-sdk-hello-world => ../hellocamadazero
+//replace github.com/jfonseca85/aws-sdk-hello-world => ../hellocamadazero
 
 go 1.17
 
-require github.com/aws/aws-sdk-go v1.42.19
+require (
+	github.com/aws/aws-sdk-go v1.42.19
+	github.com/aws/aws-sdk-go-v2 v1.11.2
+	github.com/aws/aws-sdk-go-v2/config v1.11.0
+	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.10.0
+	github.com/spf13/viper v1.10.0
+)
 
 require (
-	github.com/aws/aws-sdk-go-v2 v1.11.2 // indirect
-	github.com/aws/aws-sdk-go-v2/config v1.11.0 // indirect
 	github.com/aws/aws-sdk-go-v2/credentials v1.6.4 // indirect
 	github.com/aws/aws-sdk-go-v2/feature/ec2/imds v1.8.2 // indirect
 	github.com/aws/aws-sdk-go-v2/internal/configsources v1.1.2 // indirect
 	github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 v2.0.2 // indirect
 	github.com/aws/aws-sdk-go-v2/internal/ini v1.3.2 // indirect
-	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.10.0 // indirect
 	github.com/aws/aws-sdk-go-v2/service/internal/accept-encoding v1.5.0 // indirect
 	github.com/aws/aws-sdk-go-v2/service/internal/endpoint-discovery v1.3.3 // indirect
 	github.com/aws/aws-sdk-go-v2/service/internal/presigned-url v1.5.2 // indirect
@@ -31,9 +34,8 @@ require (
 	github.com/spf13/cast v1.4.1 // indirect
 	github.com/spf13/jwalterweatherman v1.1.0 // indirect
 	github.com/spf13/pflag v1.0.5 // indirect
-	github.com/spf13/viper v1.10.0 // indirect
 	github.com/subosito/gotenv v1.2.0 // indirect
-	golang.org/x/sys v0.0.0-20211205182925-97ca703d548d // indirect
+	golang.org/x/sys v0.0.0-20211214234402-4825e8c3871d // indirect
 	golang.org/x/text v0.3.7 // indirect
 	gopkg.in/ini.v1 v1.66.2 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
