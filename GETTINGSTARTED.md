@@ -7,9 +7,9 @@ Este exemplo mostra como você pode usar o SDK v2 para fazer uma solicitação  
 ###### Iniciando o Projeto
 
 ```sh
-$ mkdir ~/hellocamadazero
-$ cd ~/hellocamadazero
-$ go mod init hellocamadazero
+$ mkdir ~/aws-sdk-hello-world
+$ cd ~/aws-sdk-hello-world
+$ go mod init aws-sdk-hello-world
 ```
 
 ###### Adicionando dependência do SDK

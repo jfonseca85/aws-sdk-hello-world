@@ -23,8 +23,8 @@ func main() {
 	// Using the Config value, create the DynamoDB client
 	svc := dynamodb.NewFromConfig(cfg)
 
-	tableName := "camada-zero-labs-2"
-	attributeName := "id_labs_2"
+	tableName := "hello-world-labs-table-01"
+	attributeName := "id-labs-table-01"
 
 	var keytable []types.KeySchemaElement
 	var schemaElement = types.KeySchemaElement{
