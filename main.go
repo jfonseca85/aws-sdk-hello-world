@@ -22,22 +22,34 @@ func main() {
 	// Using the Config value, create the DynamoDB client
 	svc := dynamodb.NewFromConfig(cfg.AWSClient)
 
-	tableName := "hello-world-labs-table-01"
-	attributeName := "id-labs-table-01"
+	tableName := "dynamodb-table-appcell"
 
-	var keytable []types.KeySchemaElement
-	var schemaElement = types.KeySchemaElement{
-		AttributeName: &attributeName,
+	attributeNameID := "ID"
+	var schemaElementID = types.KeySchemaElement{
+		AttributeName: &attributeNameID,
 		KeyType:       types.KeyTypeHash,
 	}
-	keytable = append(keytable, schemaElement)
+
+	attributeNameVersion := "Version"
+	var schemaElementVersion = types.KeySchemaElement{
+		AttributeName: &attributeNameVersion,
+		KeyType:       types.KeyTypeHash,
+	}
+
+	var keytable []types.KeySchemaElement
+	keytable = append(keytable, schemaElementID, schemaElementVersion)
 
 	var attributeDefinitionList []types.AttributeDefinition
-	var attributeDefinition = types.AttributeDefinition{
-		AttributeName: &attributeName,
+	var attributeDefinitionID = types.AttributeDefinition{
+		AttributeName: &attributeNameID,
 		AttributeType: "S",
 	}
-	attributeDefinitionList = append(attributeDefinitionList, attributeDefinition)
+	var attributeDefinitionVersion = types.AttributeDefinition{
+		AttributeName: &attributeNameVersion,
+		AttributeType: "S",
+	}
+
+	attributeDefinitionList = append(attributeDefinitionList, attributeDefinitionID, attributeDefinitionVersion)
 
 	createTableOutput := dynamodb.CreateTableInput{
 
