@@ -2,7 +2,6 @@ package configlocal
 
 import (
 	"context"
-	"os"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/config"
@@ -13,9 +12,9 @@ func awsloadconfig(ctx context.Context, viper *viper.Viper) (aws.Config, error) 
 
 	awsEndpoint := viper.GetString("aws.endpoint_url")
 	awsRegion := viper.GetString("aws.default_region")
-
-	os.Setenv("AWS_SECRET_ACCESS_KEY", viper.GetString("aws.secret_access_key"))
-	os.Setenv("AWS_ACCESS_KEY_ID", viper.GetString("aws.access_key_id"))
+	//TODO: Inserir validação caso não exista
+	//os.Setenv("AWS_SECRET_ACCESS_KEY", viper.GetString("aws.secret_access_key"))
+	//os.Setenv("AWS_ACCESS_KEY_ID", viper.GetString("aws.access_key_id"))
 
 	customResolver := aws.EndpointResolverFunc(func(service, region string) (aws.Endpoint, error) {
 		if awsEndpoint != "" && awsRegion != "" {

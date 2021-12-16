@@ -15,12 +15,22 @@ func main() {
 	// Using the SDK's default configuration, loading additional config
 	// and credentials values from the environment variables, shared
 	// credentials, and shared configuration files
+
 	cfg, err := configlocal.NewConfig(context.TODO())
 	if err != nil {
 		log.Fatalf("unable to load SDK config, %v", err)
 	}
-	// Using the Config value, create the DynamoDB client
 	svc := dynamodb.NewFromConfig(cfg.AWSClient)
+
+	/* Subir local sem env.yaml
+	cfg, err := config.LoadDefaultConfig(context.TODO(), config.WithRegion("sa-east-1"))
+	if err != nil {
+		log.Fatalf("unable to load SDK config, %v", err)
+	}
+	// Using the Config value, create the DynamoDB client
+	svc := dynamodb.NewFromConfig(cfg)
+	// Using the Config value, create the DynamoDB client
+	*/
 
 	tableName := "dynamodb-table-appcell"
 
@@ -33,13 +43,19 @@ func main() {
 	attributeNameVersion := "Version"
 	var schemaElementVersion = types.KeySchemaElement{
 		AttributeName: &attributeNameVersion,
-		KeyType:       types.KeyTypeHash,
+		KeyType:       types.KeyTypeRange,
 	}
+
+	attributeNameStatus := "Status"
+	/*
+		var schemaElementStatus = types.KeySchemaElement{
+			AttributeName: &attributeNameStatus,
+			KeyType:       types.KeyTypeRange,
+		}*/
 
 	var keytable []types.KeySchemaElement
 	keytable = append(keytable, schemaElementID, schemaElementVersion)
 
-	var attributeDefinitionList []types.AttributeDefinition
 	var attributeDefinitionID = types.AttributeDefinition{
 		AttributeName: &attributeNameID,
 		AttributeType: "S",
@@ -49,7 +65,12 @@ func main() {
 		AttributeType: "S",
 	}
 
-	attributeDefinitionList = append(attributeDefinitionList, attributeDefinitionID, attributeDefinitionVersion)
+	var attributeDefinitionStatus = types.AttributeDefinition{
+		AttributeName: &attributeNameStatus,
+		AttributeType: "S",
+	}
+	var attributeDefinitionList []types.AttributeDefinition
+	attributeDefinitionList = append(attributeDefinitionList, attributeDefinitionID, attributeDefinitionVersion, attributeDefinitionStatus)
 
 	createTableOutput := dynamodb.CreateTableInput{
 

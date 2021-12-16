@@ -73,6 +73,10 @@ import (
 	svc := dynamodb.NewFromConfig(cfg.AWSClient)
 ```
 
+###### Comando para criar usando aws
+```sh
+ aws dynamodb create-table --table-name Musicdynamodb-table-appcell  --attribute-definitions  AttributeName=ID,AttributeType=S  AttributeName=Version,AttributeType=S --key-schema AttributeName=ID,KeyType=HASH AttributeName=Version,KeyType=RANGE --billing-mode=PAY_PER_REQUEST --endpoint-url http://localhost:8000
+```
 ###### Compile and Execute
 
 ```sh
