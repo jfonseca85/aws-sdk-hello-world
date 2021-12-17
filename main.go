@@ -45,13 +45,13 @@ func main() {
 		AttributeName: &attributeNameVersion,
 		KeyType:       types.KeyTypeRange,
 	}
-
-	attributeNameStatus := "Status"
 	/*
-		var schemaElementStatus = types.KeySchemaElement{
-			AttributeName: &attributeNameStatus,
-			KeyType:       types.KeyTypeRange,
-		}*/
+		attributeNameStatus := "Status"
+
+			var schemaElementStatus = types.KeySchemaElement{
+				AttributeName: &attributeNameStatus,
+				KeyType:       types.KeyTypeRange,
+			}*/
 
 	var keytable []types.KeySchemaElement
 	keytable = append(keytable, schemaElementID, schemaElementVersion)
@@ -64,13 +64,14 @@ func main() {
 		AttributeName: &attributeNameVersion,
 		AttributeType: "S",
 	}
-
-	var attributeDefinitionStatus = types.AttributeDefinition{
-		AttributeName: &attributeNameStatus,
-		AttributeType: "S",
-	}
+	/*
+		var attributeDefinitionStatus = types.AttributeDefinition{
+			AttributeName: &attributeNameStatus,
+			AttributeType: "S",
+		}
+	*/
 	var attributeDefinitionList []types.AttributeDefinition
-	attributeDefinitionList = append(attributeDefinitionList, attributeDefinitionID, attributeDefinitionVersion, attributeDefinitionStatus)
+	attributeDefinitionList = append(attributeDefinitionList, attributeDefinitionID, attributeDefinitionVersion)
 
 	createTableOutput := dynamodb.CreateTableInput{
 
