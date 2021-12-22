@@ -17,5 +17,3 @@ Passo-a-passo para contribuir com este código:
 
 Com essa alteração aprovada, será gerada uma **nova tag** para disponibilização da solução ou feature desenvolvida.
 
-Confira o git-flow detalhado neste diagrama:
-![git flow innersource](git-flow-innersource.png)
