@@ -2,10 +2,9 @@ package configlocal
 
 import (
 	"context"
-	"strings"
-
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/spf13/viper"
+	"strings"
 )
 
 type viperloadconfig struct {
@@ -19,7 +18,6 @@ func NewConfig(ctx context.Context) (*viperloadconfig, error) {
 	viper.SetConfigName("env")
 	viper.SetConfigType("yaml")
 
-	viper.AutomaticEnv()
 	viper.SetEnvKeyReplacer(strings.NewReplacer(".", "_"))
 
 	err := viper.ReadInConfig()

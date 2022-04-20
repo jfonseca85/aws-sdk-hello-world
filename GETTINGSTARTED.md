@@ -24,7 +24,7 @@ $ go get github.com/aws/aws-sdk-go-v2/service/dynamodb
 
 No seu editor de preferência adicione o código fonte no arquivo `main.go` sa-east-1package main
 
-```
+```go
 import (
 "context"
 "fmt"
