@@ -5,9 +5,7 @@ import (
 	"github.com/spf13/viper"
 )
 
-var (
-	_ Config = (*config)(nil)
-)
+var _ Config = (*config)(nil)
 
 type Config interface {
 	Load() (*config, error)
@@ -20,13 +18,17 @@ type config struct {
 
 // New new a config with options.
 func New(opts ...Option) Config {
-	viper := viper.GetViper()
+	o := options{
+		v:      viper.GetViper(),
+		logger: log.GetLogger(),
+	}
+
 	for _, opt := range opts {
-		opt.apply(viper)
+		opt(&o)
 	}
 	return &config{
-		v:   viper,
-		log: log.NewHelper(log.GetLogger()),
+		v:   o.v,
+		log: log.NewHelper(o.logger),
 	}
 }
 
